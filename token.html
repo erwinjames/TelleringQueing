@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="css/w3.css">
+    <link rel="stylesheet" type="text/css" href="css/token.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="containers" hidden>
+        <h1 class="w3-center"><span id="printme">0</span></h1>
+    </div>
+    <div class="containers1" hidden>
+        <h1 class="w3-center"><span id="printmes">0</span></h1>
+    </div>
+    <center>
+        <div class="container-fluid">
+            <button id="print" class="btn"><b>Regular Number</b></button>
+            <button id="prints" class="btn"><b>PRG/PWD/SR Number</b></button>
+        </div>
+    </center>>
+
+    <script src="js/printThis.js"></script>
+    <script>
+        $('#print').click(function() {
+            var datenow = new Date();
+            var foo = document.getElementById('printme').innerHTML
+            foo++;
+            document.getElementById('printme').innerHTML = foo;
+
+            $('.containers').printThis({
+                debug: false, // show the iframe for debugging
+                importCSS: true, // import parent page css
+                importStyle: false, // import style tags
+                printContainer: true, // print outer container/$.selector
+                loadCSS: "http://localhost/sss/css/w3.css", // path to additional css file - use an array [] for multiple
+                pageTitle: "", // add title to print page
+                removeInline: false, // remove inline styles from print elements
+                removeInlineSelector: "*", // custom selectors to filter inline styles. removeInline must be true
+                printDelay: 333, // variable print delay
+                header: "<div class='w3-center' style='font-size: 18px;'><span style='margin-top: -20px;'>SOCIAL SECURITY SYSTEM</span><br><span>LAPU LAPU BRANCH</span><h1 style='font-family:elephant;'>TELLERING</h1><center style='font-size: 100px; font-family:ariel; margin-top:-40px; margin-bottom:-30px;'><b>" + $('#printme').text() + "</b></center></div>",
+                // prefix to html
+                footer: "<span class='w3-center' style='font-size: 19px;'>good for 1 transaction only</span><br><br>" + "<div class='w3-center' style='margin-top:-20px;'>" + (datenow.getMonth() + 1) + "-" + datenow.getDate() + "-" + datenow.getFullYear() + "</div>", // postfix to html
+                base: false, // preserve the BASE tag or accept a string for the URL
+                formValues: true, // preserve input/form values
+                canvas: false, // copy canvas content
+                doctypeString: '<!DOCTYPE html>', // enter a different doctype for older markup
+                removeScripts: false, // remove script tags from print content
+                copyTagClasses: false, // copy classes from the html & body tag
+                beforePrintEvent: null, // callback function for printEvent in iframe
+                beforePrint: null, // function called before iframe is filled
+                afterPrint: null // function called before iframe is removed
+            });
+        })
+
+        $('#prints').click(function() {
+            var datenow = new Date();
+            var oof = document.getElementById('printmes').innerHTML
+            oof++;
+            document.getElementById('printmes').innerHTML = oof;
+
+            $('.containers1').printThis({
+                debug: false, // show the iframe for debugging
+                importCSS: true, // import parent page css
+                importStyle: false, // import style tags
+                printContainer: true, // print outer container/$.selector
+                loadCSS: "http://localhost/sss/css/w3.css", // path to additional css file - use an array [] for multiple
+                pageTitle: "", // add title to print page
+                removeInline: false, // remove inline styles from print elements
+                removeInlineSelector: "*", // custom selectors to filter inline styles. removeInline must be true
+                printDelay: 333, // variable print delay
+                header: "<div class='w3-center' style='font-size: 18px;'><span style='margin-top: -20px;'>SOCIAL SECURITY SYSTEM</span><br><span>LAPU LAPU BRANCH</span><br><span>PRG/PWD/SR</span><h1 style='font-family:elephant;'>TELLERING</h1><center style='font-size: 100px; font-family:ariel; margin-top:-40px; margin-bottom:-30px;'><b>" + $('#printmes').text() + "</b></center></div>",
+                // prefix to html
+                footer: "<span class='w3-center' style='font-size: 19px;'>good for 1 transaction only</span><br><br>" + "<div class='w3-center' style='margin-top:-20px;'>" + (datenow.getMonth() + 1) + "-" + datenow.getDate() + "-" + datenow.getFullYear() + "</div>", // postfix to html
+                base: false, // preserve the BASE tag or accept a string for the URL
+                formValues: true, // preserve input/form values
+                canvas: false, // copy canvas content
+                doctypeString: '<!DOCTYPE html>', // enter a different doctype for older markup
+                removeScripts: false, // remove script tags from print content
+                copyTagClasses: false, // copy classes from the html & body tag
+                beforePrintEvent: null, // callback function for printEvent in iframe
+                beforePrint: null, // function called before iframe is filled
+                afterPrint: null // function called before iframe is removed
+            });
+        })
+    </script>
+</body>
+
+</html>

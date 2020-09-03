@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Teller</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="js/bootstrap.min.js">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<script>
+    // if sessionStorage.tellerid is not found 
+    if (!sessionStorage.tellerid) {
+        location.href = 'login.html';
+        // go to login.html
+    }
+</script>
+
+<body>
+    <div></div>
+    <div class="container-fluid" style="margin-top: 200px;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div id="body" style="border: 4px solid black; background-color: #B7B7B7; color: blue;font-family: bold;font-size: 30px">
+
+                    <div class="form-group">
+                        <center><label>Teller NUMBER : </label>
+                            <label id="teller_id"></label></center>
+                        <div style="float:right">
+                            <label>Limit Num :</label>
+                            <label style="position: initial;" id="limit_num"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>LAST NUMBER : </label>
+                        <label id="getNextQue"></label><br>
+
+                        <label>NEXT NUMBER : </label>
+                        <label id="getnumbers"></label>
+                    </div>
+                    <div>
+                        <center>
+                            <label id="set_nums"></label>
+                            <button class="btn btn-success" type="button" id="next" style="font-family: verdana; width: 500px; height: 50px; border-radius: 30px;"><b style="font-size: 20px;">NEXT</b></button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+
+
+        </div>
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <!-- <script type="./js/sample.js"></script> -->
+    <script>
+        $(document).ready(function() {
+            var getnext = 0;
+            // var datenow = new Date();
+            // getDATE:datenow.getFullYear()+'-'+datenow.getMonth()+'-'+datenow.getDate(),
+            // next button
+
+            $('#next').click(function() {
+
+                getnext = parseInt($('#getNextQue').text()) + 1;
+                $.ajax({
+                    url: 'back_end/que_num.php',
+                    type: 'POST',
+                    data: {
+                        teller_id: $('#teller_id').text(),
+                        next_btn: 1,
+                        getNEXTNUM: getnext
+                    },
+                    success: function(echo) {
+                        console.log(echo);
+                    }
+                });
+            });
+            // end next button
+
+            $.ajax({
+                type: "GET",
+                url: "back_end/getNum.php",
+                dataType: "html", //expect html to be returned                
+                success: function(response) {
+                    $("#limit_num").html(response);
+                    //alert(response);
+                }
+
+            });
+            // refresh next que many time 
+            setInterval(getque, 100);
+
+            function getque(echo) {
+                getNEXTQUE();
+            }
+
+            function getNEXTQUE() {
+                $.ajax({
+                    url: 'back_end/display_que.php',
+                    type: 'POST',
+                    data: {
+                        // stockNum: $('#getNextQue').text(),
+                        teller_id: $('#teller_id').text(),
+                        getNEXTQUES: 1
+                    },
+                    success: function(echo) {
+                        if (echo == 'failed') {
+
+                            alert('youve reach the limit of quieng');
+
+                        } else if (echo == 'pakit') {
+                            alert('soos');
+                        } else {
+                            $('#getNextQue').text(echo);
+                            $('#getnumbers').text((parseInt($('#getNextQue').text()) + 1));
+                        }
+                    }
+                });
+            }
+
+
+
+
+            // end refresh
+
+            $('#teller_id').text(sessionStorage.tellerid);
+        })
+    </script>
+</body>
+
+</html>

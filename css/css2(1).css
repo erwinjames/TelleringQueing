@@ -1,0 +1,39 @@
+body {padding: 0;
+      margin: 0;
+      background:#0D2EFF;
+}
+.containers{width: 100%;
+          height: 625px;
+          border: 1px solid black;
+
+}
+.counter{
+    color: #ffffff;
+    border-radius: 20px;
+    background-color: #2D49F9;
+    padding:20px 20px;
+    margin-top:10px;
+    width: 500px;
+    font-family:'Bookman Old Style';
+    font-size:50px;
+    border: 3px solid white;
+    display:block;
+    
+}
+.vie{
+    color: #2D49F9;
+    border-radius: 20px;
+    background-color: #FEFEFF;
+    width: 840px;
+    height: 603px;
+    border: 6px solid white;
+    position:absolute;
+    top: 11px;
+    right: 10px;
+    text-align:center;
+    font-family:'Bookman Old Style';
+    font-size:80px;
+}
+.mar{
+    margin-top: 50px;
+}
